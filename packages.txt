@@ -1,0 +1,7 @@
+transformers
+torch
+wordcloud
+matplotlib
+nltk 
+urllib3
+pandas
