@@ -37,7 +37,7 @@ for i, (message, probabilities) in enumerate(zip(test_messages, proba), 1):
     results.append({
         'sentence_id': i,
         'sentiment': predicted_class,
-        'confidence': float(svm_confidence)  # Konwersja numpy.float do float
+        'confidence': float(svm_confidence)
     })
 
 # Zapis wyników

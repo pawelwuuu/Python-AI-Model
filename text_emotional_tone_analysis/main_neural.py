@@ -2,7 +2,7 @@
 from utils.tokenizer import simple_tokenizer, filter_stopwords
 from models.sentiment_model import create_sentiment_analyzer, analyze_sentiment
 from utils.visualizations import generate_wordcloud
-from utils.results import save_sentiment_analysis_results  # Importujemy funkcję zapisującą wyniki
+from utils.results import save_sentiment_analysis_results
 from data.text_messages import test_messages
 
 all_words = []

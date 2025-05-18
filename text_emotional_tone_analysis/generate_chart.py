@@ -9,60 +9,72 @@ df = pd.read_csv('sentiment_results.csv')
 fig, ax = plt.subplots(figsize=(18, 12))
 
 # Konfiguracja kolorów i parametrów
-colors = {'POSITIVE': '#2ecc71', 'NEGATIVE': '#e74c3c'}
+colors = {
+    'POSITIVE': '#2ecc71', 
+    'NEGATIVE': '#e74c3c',
+    'NEUTRAL': '#f1c40f'
+}
+
 algorithms = df['Algorithm'].unique()
 n_algorithms = len(algorithms)
 sentences = sorted(df['Sentence ID'].unique())
-bar_width = 0.8/n_algorithms  # Dynamiczna szerokość słupków
-group_spacing = 0.5
+bar_width = 1.2/n_algorithms  # szerokość słupka
+group_spacing = 1.5  # odstęp między grupami
+inner_spacing = 0.2  # odstęp między słupkami w grupie
 
-# Główne pozycje grup na osi X
-x = np.arange(len(sentences)) * (n_algorithms + group_spacing)
+# pozycje grup na osi X
+x = np.arange(len(sentences)) * (n_algorithms * (bar_width + inner_spacing) + group_spacing)
 
 # Iteracja po zdaniach i algorytmach
 for i, sentence in enumerate(sentences):
     for idx, algorithm in enumerate(algorithms):
-        # Pobierz dane dla kombinacji zdanie-algorytm
         data = df[(df['Algorithm'] == algorithm) & (df['Sentence ID'] == sentence)]
         if not data.empty:
             sentiment = data['Sentiment'].values[0]
             confidence = data['Confidence'].values[0]
             
-            # Oblicz pozycję słupka
-            x_pos = x[i] + idx * bar_width
+            # pozycja slupa na podstawie inner_spacing
+            x_pos = x[i] + idx * (bar_width + inner_spacing)
             
-            # Rysowanie słupka
-            bar = ax.bar(x_pos, 
-                        confidence, 
-                        width=bar_width*0.9, 
-                        color=colors[sentiment],
-                        alpha=0.8,
-                        edgecolor='black',
-                        linewidth=0.5)
+            # slupki
+            bar = ax.bar(
+                x_pos, 
+                confidence, 
+                width=bar_width,
+                color=colors[sentiment],
+                alpha=0.8,
+                edgecolor='black',
+                linewidth=0.8
+            )
             
-            # Dodanie etykiety algorytmu
-            ax.text(x_pos + bar_width/2,  # Pozycja X
-                    0.02,                 # Pozycja Y (na dole słupka)
-                    algorithm.upper(),    # Tekst
-                    rotation=90,           # Obrót 90 stopni
-                    fontsize=8,            # Rozmiar czcionki
-                    va='bottom',           # Wyrównanie pionowe
-                    ha='center',           # Wyrównanie poziome
-                    color='black')
+            # labele
+            ax.text(
+                x_pos + bar_width/10,
+                0.05,
+                algorithm.upper(),
+                rotation=90,
+                fontsize=7,
+                va='bottom',
+                ha='center',
+                color='black',
+                alpha=0.9,
+                fontweight='bold'
+            )
 
 # Konfiguracja osi i etykiet
-ax.set_xticks(x + (n_algorithms-1)*bar_width/2)
+ax.set_xticks(x + (n_algorithms-1)*(bar_width + inner_spacing)/2)
 ax.set_xticklabels([f'Message {i+1}' for i in range(len(sentences))], fontsize=10)
 ax.set_xlabel('Numer wiadomości', fontsize=12, labelpad=15)
 ax.set_ylabel('Poziom pewności', fontsize=12, labelpad=15)
 ax.set_title('Porównanie wyników algorytmów z podziałem na wiadomości i sentyment', pad=25, fontsize=14)
 ax.set_ylim(0, 1.1)
 
-# Dodanie legendy dla sentymentów
+# legenda
 from matplotlib.patches import Patch
 legend_elements = [
     Patch(facecolor=colors['POSITIVE'], label='Pozytywny', alpha=0.8),
-    Patch(facecolor=colors['NEGATIVE'], label='Negatywny', alpha=0.8)
+    Patch(facecolor=colors['NEGATIVE'], label='Negatywny', alpha=0.8),
+    Patch(facecolor=colors['NEUTRAL'], label='Neutralny', alpha=0.8)
 ]
 ax.legend(handles=legend_elements, 
           loc='upper right', 
@@ -76,9 +88,9 @@ ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 ax.spines['left'].set_alpha(0.4)
 
-# Dodatkowe odstępy między grupami
+# Linie oddzielające grupy
 for i in range(len(sentences)-1):
-    ax.axvline(x[i] + n_algorithms*bar_width + group_spacing/2, 
+    ax.axvline(x[i] + n_algorithms*(bar_width + inner_spacing) + group_spacing/2, 
                color='gray', 
                linestyle=':', 
                linewidth=0.8)
