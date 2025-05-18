@@ -26,6 +26,7 @@ def analyze_messages(model, vectorizer, messages):
     all_words = []
     
     for i, message in enumerate(messages, 1):
+        message = message[0]
         tokens = filter_stopwords(simple_tokenizer(message))
         all_words.extend(tokens)
         

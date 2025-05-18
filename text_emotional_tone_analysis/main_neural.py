@@ -15,6 +15,7 @@ results = []
 
 # Przetwarzanie wiadomości
 for i, message in enumerate(test_messages, 1):
+    message = message[0]
     # Tokenizacja i czyszczenie
     tokens = simple_tokenizer(message)
     filtered_tokens = filter_stopwords(tokens)

@@ -27,6 +27,7 @@ all_words = []
 results = []
 
 for i, message in enumerate(test_messages, 1):
+    message = message[0]
     # Tokenizacja i czyszczenie dla chmury słów
     tokens = simple_tokenizer(message)
     filtered_tokens = filter_stopwords(tokens)
