@@ -1,11 +1,9 @@
 # utils/tokenizer.py
 import re
 
-# Prosta funkcja tokenizacji bez NLTK
 def simple_tokenizer(text):
-    return re.findall(r'\b\w{3,}\b', text.lower())  # Znajduje tylko słowa o długości >= 3
+    return re.findall(r'\b\w{3,}\b', text.lower())  
 
-# Ręczna lista angielskich stopwords (skrócona wersja)
 stop_words = {
     'i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 
     'you', 'your', 'yours', 'yourself', 'yourselves',

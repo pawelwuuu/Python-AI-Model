@@ -15,14 +15,12 @@ for algorithm in algorithms:
     accuracy = correct / len(message_truth)
     algorithm_accuracy[algorithm] = accuracy
 
-# Tworzenie wykresu kolumnowego
 alg_names = list(algorithm_accuracy.keys())
-accuracies = [v * 100 for v in algorithm_accuracy.values()]  # w procentach
+accuracies = [v * 100 for v in algorithm_accuracy.values()] 
 
 plt.figure(figsize=(8,6))
 bars = plt.bar(alg_names, accuracies, color="#3498db", alpha=0.8, edgecolor="black")
 
-# Dodanie podpisów nad słupkami
 for bar, acc, name in zip(bars, accuracies, alg_names):
     plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1, f"{acc:.2f}%", 
              ha='center', va='bottom', fontsize=11, fontweight='bold')

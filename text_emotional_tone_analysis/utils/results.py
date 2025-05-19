@@ -9,15 +9,12 @@ def save_sentiment_analysis_results(results, algorithm_name, filename="sentiment
     """
     fieldnames = ['Algorithm', 'Sentence ID', 'Sentiment', 'Confidence']
 
-    # Otwieramy plik CSV w trybie append (dodawanie nowych danych)
     with open(filename, mode='a', newline='', encoding='utf-8') as file:
         writer = csv.DictWriter(file, fieldnames=fieldnames)
 
-        # Jeśli plik jest pusty, dodaj nagłówki
         if file.tell() == 0:
             writer.writeheader()
 
-        # Zapisujemy wyniki dla każdego zdania
         for result in results:
             writer.writerow({
                 'Algorithm': algorithm_name,

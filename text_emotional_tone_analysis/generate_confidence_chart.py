@@ -2,13 +2,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Wczytanie danych
 df = pd.read_csv('sentiment_results.csv')
 
-# Utworzenie siatki wykresów
 fig, ax = plt.subplots(figsize=(18, 12))
 
-# Konfiguracja kolorów i parametrów
 colors = {
     'POSITIVE': '#2ecc71', 
     'NEGATIVE': '#e74c3c',
@@ -18,14 +15,12 @@ colors = {
 algorithms = df['Algorithm'].unique()
 n_algorithms = len(algorithms)
 sentences = sorted(df['Sentence ID'].unique())
-bar_width = 1.2/n_algorithms  # szerokość słupka
-group_spacing = 1.5  # odstęp między grupami
-inner_spacing = 0.2  # odstęp między słupkami w grupie
+bar_width = 1.2/n_algorithms  
+group_spacing = 1.5  
+inner_spacing = 0.2  
 
-# pozycje grup na osi X
 x = np.arange(len(sentences)) * (n_algorithms * (bar_width + inner_spacing) + group_spacing)
 
-# Iteracja po zdaniach i algorytmach
 for i, sentence in enumerate(sentences):
     for idx, algorithm in enumerate(algorithms):
         data = df[(df['Algorithm'] == algorithm) & (df['Sentence ID'] == sentence)]
@@ -33,10 +28,8 @@ for i, sentence in enumerate(sentences):
             sentiment = data['Sentiment'].values[0]
             confidence = data['Confidence'].values[0]
             
-            # pozycja slupa na podstawie inner_spacing
             x_pos = x[i] + idx * (bar_width + inner_spacing)
             
-            # slupki
             bar = ax.bar(
                 x_pos, 
                 confidence, 
@@ -47,7 +40,6 @@ for i, sentence in enumerate(sentences):
                 linewidth=0.8
             )
             
-            # labele
             ax.text(
                 x_pos + bar_width/10,
                 0.05,
@@ -61,7 +53,6 @@ for i, sentence in enumerate(sentences):
                 fontweight='bold'
             )
 
-# Konfiguracja osi i etykiet
 ax.set_xticks(x + (n_algorithms-1)*(bar_width + inner_spacing)/2)
 ax.set_xticklabels([f'Message {i+1}' for i in range(len(sentences))], fontsize=10)
 ax.set_xlabel('Numer wiadomości', fontsize=12, labelpad=15)
@@ -82,13 +73,11 @@ ax.legend(handles=legend_elements,
           title='Sentyment',
           title_fontsize=11)
 
-# Linie pomocnicze i siatka
 ax.yaxis.grid(True, linestyle='--', alpha=0.6)
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 ax.spines['left'].set_alpha(0.4)
 
-# Linie oddzielające grupy
 for i in range(len(sentences)-1):
     ax.axvline(x[i] + n_algorithms*(bar_width + inner_spacing) + group_spacing/2, 
                color='gray', 

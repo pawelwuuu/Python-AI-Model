@@ -50,7 +50,6 @@ def analyze_messages(model, vectorizer, messages):
 def main():
     train_texts, train_labels = load_data()
     
-    # Weryfikacja danych
     class_distribution = Counter(train_labels)
     print("\nClass distribution in training data:")
     for cls, count in class_distribution.items():
