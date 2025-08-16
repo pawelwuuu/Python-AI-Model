@@ -1,56 +1,54 @@
-# Analiza Emocjonalnego Tonu Tekstu
+# Emotional Tone Analysis of Text
 
-Projekt służy do klasyfikacji emocjonalnego tonu wiadomości tekstowych przy użyciu różnych modeli uczenia maszynowego: Naive Bayes, KNN, SVM oraz sieci neuronowej.
+The project is designed for classifying the emotional tone of text messages using various machine learning models: Naive Bayes, KNN, SVM, and a neural network.
 
-## 📁 Struktura katalogów
+## 📁 Directory Structure
 
 ```
-
-projekt2/
-├── text\_emotional\_tone\_analysis/
-│   ├── data/                  # Dane treningowe i testowe
-│   │   ├── text\_messages.py
-│   │   └── train\_data.py
-│   ├── models/                # Implementacje modeli ML
-│   │   ├── knn\_model.py
-│   │   ├── naive\_bayes\_model.py
-│   │   ├── sentiment\_model.py
-│   │   └── svm\_model.py
-│   ├── utils/                 # Tokenizacja, metryki, wizualizacje
+project2/
+├── text_emotional_tone_analysis/
+│   ├── data/                  # Training and test data
+│   │   ├── text_messages.py
+│   │   └── train_data.py
+│   ├── models/                # ML model implementations
+│   │   ├── knn_model.py
+│   │   ├── naive_bayes_model.py
+│   │   ├── sentiment_model.py
+│   │   └── svm_model.py
+│   ├── utils/                 # Tokenization, metrics, visualizations
 │   │   ├── results.py
 │   │   ├── tokenizer.py
 │   │   └── visualizations.py
-│   ├── main\_bayes.py          # Uruchomienie klasyfikacji Naive Bayes
-│   ├── main\_knn.py            # Uruchomienie klasyfikacji KNN
-│   ├── main\_svm.py            # Uruchomienie klasyfikacji SVM
-│   ├── main\_neural.py         # Uruchomienie sieci neuronowej
-│   ├── generate\_accurancy\_chart.py
-│   └── generate\_confidence\_chart.py
-├── packages.txt               # Lista wymaganych pakietów
-└── README.md                  # Dokumentacja
+│   ├── main_bayes.py          # Run Naive Bayes classification
+│   ├── main_knn.py            # Run KNN classification
+│   ├── main_svm.py            # Run SVM classification
+│   ├── main_neural.py         # Run neural network
+│   ├── generate_accuracy_chart.py
+│   └── generate_confidence_chart.py
+├── packages.txt               # List of required packages
+└── README.md                  # Documentation
+```
 
-````
+## 🧠 Models
 
-## 🧠 Modele
+The project implements and compares different emotional tone classifiers:
 
-Projekt implementuje i porównuje różne klasyfikatory emocjonalnego tonu:
+- **Naive Bayes** – fast and effective for text
+- **KNN (K-Nearest Neighbors)** – similarity-based classification
+- **SVM (Support Vector Machine)** – linear classifier with margin
+- **Neural Network** – model based on Transformers/Pipeline
 
-- **Naive Bayes** – szybki i skuteczny dla tekstów
-- **KNN (K-Nearest Neighbors)** – klasyfikacja oparta na podobieństwie
-- **SVM (Support Vector Machine)** – klasyfikator liniowy z marginesem
-- **Sieć neuronowa** – model oparty na Transformers/Pipeline
+## 📦 Requirements
 
-## 📦 Wymagania
-
-Aby uruchomić projekt, zainstaluj zależności:
+To run the project, install the dependencies:
 
 ```bash
 pip install -r packages.txt
-````
+```
 
-## 🚀 Uruchamianie
+## 🚀 Running
 
-Każdy model uruchamiany jest osobnym skryptem:
+Each model is executed via a separate script:
 
 ```bash
 python text_emotional_tone_analysis/main_bayes.py
@@ -59,29 +57,29 @@ python text_emotional_tone_analysis/main_svm.py
 python text_emotional_tone_analysis/main_neural.py
 ```
 
-## 📊 Wizualizacje
+## 📊 Visualizations
 
-Aby wygenerować wykresy dokładności i pewności klasyfikacji:
+To generate accuracy and confidence charts:
 
 ```bash
-python text_emotional_tone_analysis/generate_accurancy_chart.py
+python text_emotional_tone_analysis/generate_accuracy_chart.py
 python text_emotional_tone_analysis/generate_confidence_chart.py
 ```
 
-Każdy z plików main_*.py (np. main_bayes.py, main_knn.py) po uruchomieniu trenuje model i generuje wyniki klasyfikacji, które są zapisywane do pliku CSV. Plik ten zawiera dane takie jak dokładność, przewidywane etykiety, prawdopodobieństwo klasyfikacji i inne metryki.
+Each of the `main_*.py` files (e.g., `main_bayes.py`, `main_knn.py`) trains the model and generates classification results, which are saved into a CSV file. This file contains data such as accuracy, predicted labels, classification probabilities, and other metrics.
 
-Następnie za pomocą skryptów tworzone są wykresy, które prezentują porównanie skuteczności modeli oraz rozkład pewności klasyfikacji.
+The scripts then create plots that present model performance comparisons and classification confidence distributions.
 
-## 📝 Dane
+## 📝 Data
 
-W plikach `data/text_messages.py` i `data/train_data.py` znajdują się przykładowe dane używane do trenowania i testowania modeli.
+The files `data/text_messages.py` and `data/train_data.py` contain sample data used for training and testing the models.
 
-## 🛠 Przydatne moduły
+## 🛠 Useful Modules
 
-* `tokenizer.py` – przygotowanie danych tekstowych
-* `results.py` – metryki i ewaluacja
-* `visualizations.py` – generowanie wykresów z wynikami
+* `tokenizer.py` – text data preprocessing  
+* `results.py` – metrics and evaluation  
+* `visualizations.py` – generating result charts  
 
-## 👤 Autor
+## 👤 Authors
 
-Autor projektu: Igor Rozanowski, Pawel Wojcik
+Project authors: **Igor Rozanowski**, **Pawel Wojcik**
